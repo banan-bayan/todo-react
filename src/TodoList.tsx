@@ -12,27 +12,17 @@ const TodoList = ({
 }: TodoListProps) => {
   return (
     <ul className="todo-list">
-      {tasks.map(
-        ({
-          id,
-          text,
-          status,
-        }: {
-          id: number;
-          text: string;
-          status: string;
-        }) => (
-          <TodoItem
-            completeNameBtn={completeNameBtn}
-            classNameBtn={status === "completed" ? "-disabled" : ""}
-            isDisable={status === "completed"}
-            key={id}
-            changeStatusHandler={() => changeStatusHandler(id)}
-          >
-            {text}
-          </TodoItem>
-        )
-      )}
+      {tasks.map(({ id, text, status }) => (
+        <TodoItem
+          completeNameBtn={completeNameBtn}
+          classNameBtn={status === "completed" ? "-disabled" : ""}
+          isDisable={status === "completed"}
+          key={id}
+          changeStatusHandler={() => changeStatusHandler(id)}
+        >
+          {text}
+        </TodoItem>
+      ))}
     </ul>
   );
 };

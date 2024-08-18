@@ -1,10 +1,4 @@
 export type StatusesType = "completed" | "active";
-export enum Buttons {
-  All,
-  Active,
-  Completed,
-  ClearCompleted
-}
 
 export interface TaskType {
   id: number;

@@ -5,7 +5,7 @@ interface TodoItemProps {
   changeStatusHandler: () => void;
   isDisable: boolean;
   classNameBtn: string;
-  completeNameBtn: string
+  completeNameBtn: string;
 }
 
 const TodoItem = ({
@@ -13,11 +13,11 @@ const TodoItem = ({
   changeStatusHandler,
   isDisable,
   classNameBtn,
-  completeNameBtn
+  completeNameBtn,
 }: TodoItemProps) => {
   return (
     <li className="todo-item">
-      <span  className="todo-item__text">{children}</span >
+      <span className="todo-item__text">{children}</span>
       <Button
         isDisable={isDisable}
         className={`todo-item__complete-button${classNameBtn}`}

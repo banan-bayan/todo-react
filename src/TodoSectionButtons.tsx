@@ -6,7 +6,6 @@ interface TodoSectionButtonsProps {
   activeTasksCountText: string;
   getFilterTasks: (id: number) => void
 }
-
 const TodoSectionButtons = ({
   getFilterTasks,
   buttonsData,
@@ -22,9 +21,7 @@ const TodoSectionButtons = ({
             <Button
               key={id}
               clickHandler={() => getFilterTasks(id)}
-              className='todo-buttons__button'
-              classNameActiveBtn={"-active"}
-              activeButtonId={activeButtonId}
+              className={id === activeButtonId && activeButtonId ? 'todo-buttons__button todo-buttons__button-active' : 'todo-buttons__button'}
               id={id}
             >
               {name}
