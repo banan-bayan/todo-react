@@ -15,5 +15,6 @@ export interface TaskType {
 export interface ButtonSectionDataType {
  id: number
  name: ButtonsSectionNamesType
+ action?: (id: number) => void
 }
 

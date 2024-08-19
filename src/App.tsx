@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import "./App.css";
 import InputSection from "./InputSection";
 import TodoList from "./TodoList";
@@ -6,44 +6,41 @@ import TodoSectionButtons from "./TodoSectionButtons";
 import { TaskType, ButtonSectionDataType } from "./Types";
 
 const App = () => {
-  const [tasks, setTasks] = useState<TaskType[]>([]);
-  const [visibleTasks, setVisibleTasks] = useState<TaskType[]>([]);
+  const getInitialTasks = (): TaskType[] => {
+    const tasksFromStorage = localStorage.getItem("tasks");
+
+    return tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
+  };
+
+  const [tasks, setTasks] = useState<TaskType[]>(getInitialTasks);
   const [inputValue, setInputValue] = useState<string>("");
   const [activeButtonId, setActiveButtonId] = useState<number>(2);
 
-  const activeCountTasks = tasks.filter((task) => task.status === "active").length;
-
   useEffect(() => {
-    applyFilter(activeButtonId);
-  }, [tasks, activeButtonId]);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  const activeCountTasks = tasks.filter(
+    (task) => task.status === "active"
+  ).length;
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const applyFilter = (filterId: number) => {
+  const applyFilter = (filterId: number): TaskType[] => {
     switch (filterId) {
       case 1:
-        setVisibleTasks(tasks.filter(({ status }) => status === "active"));
-        break;
-      case 2:
-        setVisibleTasks(tasks);
-        break;
+        return tasks.filter(({ status }) => status === "active");
       case 3:
-        setVisibleTasks(tasks.filter(({ status }) => status === "completed"));
-        break;
-      case 4:
-        clearCompletedTasks();
-        break;
+        return tasks.filter(({ status }) => status === "completed");
       default:
-        setVisibleTasks(tasks);
+        return tasks;
     }
   };
 
   const clearCompletedTasks = () => {
-    const filteredTasks = tasks.filter(({ status }) => status !== "completed");
-    setTasks(filteredTasks);
-    setVisibleTasks(filteredTasks);
+    setTasks((prev) => prev.filter(({ status }) => status !== "completed"));
   };
 
   const addTask = () => {
@@ -76,7 +73,7 @@ const App = () => {
     { id: 1, name: "Active" },
     { id: 2, name: "All" },
     { id: 3, name: "Completed" },
-    { id: 4, name: "Clear Completed" },
+    { id: 4, name: "Clear Completed", action: clearCompletedTasks },
   ];
 
   return (
@@ -93,7 +90,7 @@ const App = () => {
       />
       <TodoList
         completeNameBtn="Complete"
-        tasks={visibleTasks}
+        tasks={applyFilter(activeButtonId)}
         changeStatusHandler={changeStatusHandler}
       />
       <TodoSectionButtons
