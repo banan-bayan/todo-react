@@ -1,9 +1,9 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import "./App.css";
-import InputSection from "./InputSection";
-import TodoList from "./TodoList";
-import TodoSectionButtons from "./TodoSectionButtons";
-import { TaskType, ButtonSectionDataType } from "./Types";
+import InputSection from "../InputSection/InputSection";
+import TodoList from "../TodoList/TodoList";
+import TodoSectionButtons from "../TodoSectionButtons/TodoSectionButtons";
+import { TaskType, ButtonSectionDataType, EStatusType } from "../../Types";
 
 const App = () => {
   const getInitialTasks = (): TaskType[] => {
@@ -21,7 +21,7 @@ const App = () => {
   }, [tasks]);
 
   const activeCountTasks = tasks.filter(
-    (task) => task.status === "active"
+    (task) => task.status === EStatusType.active
   ).length;
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,16 +31,16 @@ const App = () => {
   const applyFilter = (filterId: number): TaskType[] => {
     switch (filterId) {
       case 1:
-        return tasks.filter(({ status }) => status === "active");
+        return tasks.filter(({ status }) => status === EStatusType.active);
       case 3:
-        return tasks.filter(({ status }) => status === "completed");
+        return tasks.filter(({ status }) => status === EStatusType.completed);
       default:
         return tasks;
     }
   };
 
   const clearCompletedTasks = () => {
-    setTasks((prev) => prev.filter(({ status }) => status !== "completed"));
+    setTasks((prev) => prev.filter(({ status }) => status !== EStatusType.completed));
   };
 
   const addTask = () => {
@@ -48,7 +48,7 @@ const App = () => {
       const newTask: TaskType = {
         id: Date.now(),
         text: inputValue,
-        status: "active",
+        status: EStatusType.active,
       };
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setInputValue("");
@@ -64,7 +64,7 @@ const App = () => {
   const changeStatusHandler = (taskId: number) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        taskId === task.id ? { ...task, status: "completed" } : task
+        taskId === task.id ? { ...task, status: EStatusType.completed } : task
       )
     );
   };
@@ -89,7 +89,7 @@ const App = () => {
         inputValue={inputValue}
       />
       <TodoList
-        completeNameBtn="Complete"
+        completeNameBtn="✓"
         tasks={applyFilter(activeButtonId)}
         changeStatusHandler={changeStatusHandler}
       />

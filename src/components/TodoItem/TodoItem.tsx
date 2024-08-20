@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../Button/Button";
 
 interface TodoItemProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ const TodoItem = ({
       <span className="todo-item__text">{children}</span>
       <Button
         isDisable={isDisable}
-        className={`todo-item__complete-button${classNameBtn}`}
+        className={classNameBtn}
         clickHandler={changeStatusHandler}
       >
         {completeNameBtn}

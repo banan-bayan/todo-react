@@ -1,9 +1,12 @@
-export type StatusesType = "completed" | "active";
+export enum EStatusType {
+  completed = "completed",
+  active = "active"
+}
 
 export interface TaskType {
   id: number;
   text: string;
-  status: StatusesType;
+  status: EStatusType;
 }
 
  type ButtonsSectionNamesType =

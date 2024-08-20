@@ -94,27 +94,39 @@
 }
 
 .todo-item__complete-button {
-  visibility: hidden;
-  opacity: 0;
-  font-size: 1.1rem;
-  border-radius: 0 4px 4px 0;
-  background-color: #f9f9f9;
-  transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.3s ease;
+  border: 2px solid lightgrey;
+  color: transparent;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .todo-item:hover .todo-item__complete-button {
   visibility: visible;
   opacity: 1;
 }
-
-.todo-item__complete-button-disabled {
-  background-color: lightgreen;
-  border-radius: 0 4px 4px 0;
-  font-size: 1.1rem;
-
+.todo-item__complete-button:hover {
+  border: 2px solid teal;
+  transition: all 0.3s ease;
+}
+.todo-item__complete-button:active {
+  border: 2px solid lightgray;
+  transition: all 0.3s ease;
+}
+.todo-item__complete-button-disabled:hover {
+  transition: all 0.3s ease;
+  border: 2px solid lightgray;
 }
 
-/* Стили для кнопок */
+
+
+.todo-item__complete-button-disabled {
+  transition: all 0.3s ease;
+  color: darkgreen;
+  cursor: not-allowed;
+  text-shadow: 1px 1px 1px rgba(4,113,18, 0.98);
+}
+
 .todo-buttons {
   display: flex;
   justify-content: center;

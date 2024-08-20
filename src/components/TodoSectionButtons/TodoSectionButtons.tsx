@@ -1,5 +1,5 @@
-import Button from "./Button";
-import { ButtonSectionDataType } from "./Types";
+import Button from "../Button/Button";
+import { ButtonSectionDataType } from "../../Types";
 interface TodoSectionButtonsProps {
   buttonsData: ButtonSectionDataType[];
   activeButtonId: number;

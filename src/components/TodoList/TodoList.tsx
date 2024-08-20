@@ -1,5 +1,5 @@
-import TodoItem from "./TodoItem";
-import { TaskType } from "./Types";
+import TodoItem from "../TodoItem/TodoItem";
+import { TaskType } from "../../Types";
 interface TodoListProps {
   tasks: TaskType[];
   changeStatusHandler: (id: number) => void;
@@ -15,7 +15,7 @@ const TodoList = ({
       {tasks.map(({ id, text, status }) => (
         <TodoItem
           completeNameBtn={completeNameBtn}
-          classNameBtn={status === "completed" ? "-disabled" : ""}
+          classNameBtn={status === "completed" ? "todo-item__complete-button todo-item__complete-button-disabled" : "todo-item__complete-button"}
           isDisable={status === "completed"}
           key={id}
           changeStatusHandler={() => changeStatusHandler(id)}
