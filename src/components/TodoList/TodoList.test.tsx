@@ -1,10 +1,10 @@
 import { render, screen, fireEvent  } from "@testing-library/react";
 import TodoList from "./TodoList";
-import { TaskType } from "../../Types";
+import { TaskType, EStatusType } from "../../Types";
 
 const mockTasks: TaskType[] =  [
-  { id: 1, text: 'Task 1', status: 'active' },
-  { id: 2, text: 'Task 2', status: 'completed' },
+  { id: 1, text: 'Task 1', status: EStatusType.active },
+  { id: 2, text: 'Task 2', status: EStatusType.completed },
 ];
 
 const mockChangeStatusHandler = jest.fn();
