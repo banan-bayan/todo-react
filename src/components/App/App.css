@@ -118,8 +118,6 @@
   border: 2px solid lightgray;
 }
 
-
-
 .todo-item__complete-button-disabled {
   transition: all 0.3s ease;
   color: darkgreen;
