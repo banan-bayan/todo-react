@@ -28,10 +28,6 @@ const App = () => {
     setInputValue(e.target.value);
   };
 
-  // const applyFilter = (selectedStatus: EStatusType): TaskType[] => (
-  //   tasks.filter(({ status }) => status === selectedStatus)
-  // )
-
   const applyFilter = (filterId: number): TaskType[] => {
     switch (filterId) {
       case 1:
