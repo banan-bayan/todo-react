@@ -20,7 +20,7 @@ const TodoSectionButtons = ({
          
             <Button
               key={id}
-              clickHandler={!action ? () => getFilterTasks(id) : () =>  action(id)}
+              clickHandler={!action ? () => getFilterTasks(id) : () => action(id)}
               className={id === activeButtonId && activeButtonId ? 'todo-buttons__button todo-buttons__button-active' : 'todo-buttons__button'}
               id={id}
             >

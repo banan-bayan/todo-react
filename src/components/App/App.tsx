@@ -28,6 +28,10 @@ const App = () => {
     setInputValue(e.target.value);
   };
 
+  // const applyFilter = (selectedStatus: EStatusType): TaskType[] => (
+  //   tasks.filter(({ status }) => status === selectedStatus)
+  // )
+
   const applyFilter = (filterId: number): TaskType[] => {
     switch (filterId) {
       case 1:
@@ -40,19 +44,21 @@ const App = () => {
   };
 
   const clearCompletedTasks = () => {
-    setTasks((prev) => prev.filter(({ status }) => status !== EStatusType.completed));
+    setTasks((prev) =>
+      prev.filter(({ status }) => status !== EStatusType.completed)
+    );
   };
 
   const addTask = () => {
-    if (inputValue.trim()) {
-      const newTask: TaskType = {
-        id: Date.now(),
-        text: inputValue,
-        status: EStatusType.active,
-      };
-      setTasks((prevTasks) => [...prevTasks, newTask]);
-      setInputValue("");
-    }
+    if (!inputValue.trim()) return;
+
+    const newTask: TaskType = {
+      id: Date.now(),
+      text: inputValue,
+      status: EStatusType.active,
+    };
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setInputValue("");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
